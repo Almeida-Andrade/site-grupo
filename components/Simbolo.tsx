@@ -1,17 +1,28 @@
-// O "A" do logo do grupo redesenhado em vetor: duas pernas e a barra em tinta, a faixa interna em lavanda.
-export function Simbolo({ className, titulo }: { className?: string; titulo?: string }) {
+import { useId } from 'react'
+
+// O "A" do logo do grupo em vetor, nas coordenadas do arquivo original (1413 × 1060).
+export const PERNA_ESQUERDA = '468,2 655,2 453,571 800,571 847,702 404,702 349,862 158,862'
+export const PERNA_DIREITA = '715,2 902,2 1211,862 1021,862'
+export const FAIXA = '694,2 715,2 798,240 694,527 507,527'
+export const CAIXA = '158 2 1053 860'
+
+export function Simbolo({ className, chapado }: { className?: string; chapado?: boolean }) {
+  const id = useId()
+  const tinta = chapado ? 'currentColor' : `url(#${id})`
   return (
-    <svg
-      className={className}
-      viewBox="0 0 340 270"
-      role={titulo ? 'img' : undefined}
-      aria-hidden={titulo ? undefined : true}
-      aria-label={titulo}
-    >
-      <polygon fill="var(--simbolo-tinta, #1B2470)" points="86,0 108,0 108,168 80,270 0,270" />
-      <polygon fill="var(--simbolo-tinta, #1B2470)" points="108,168 214,168 206,196 108,196" />
-      <polygon fill="var(--simbolo-tinta, #1B2470)" points="168,0 250,0 340,270 262,270" />
-      <polygon fill="var(--simbolo-lavanda, #9D9BD3)" points="152,0 196,0 140,168 108,168" />
+    <svg className={className} viewBox={CAIXA} aria-hidden>
+      {!chapado && (
+        <defs>
+          <linearGradient id={id} x1="158" x2="1211" y1="0" y2="0" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stopColor="#273A90" />
+            <stop offset="0.6" stopColor="#33365C" />
+            <stop offset="1" stopColor="#283A90" />
+          </linearGradient>
+        </defs>
+      )}
+      <polygon fill={tinta} points={PERNA_ESQUERDA} />
+      <polygon fill={tinta} points={PERNA_DIREITA} />
+      <polygon fill={chapado ? 'currentColor' : '#9A97C8'} points={FAIXA} />
     </svg>
   )
 }

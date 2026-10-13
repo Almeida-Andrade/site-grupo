@@ -15,26 +15,7 @@
   gap: 12px;
 }
 
-.marcaSimbolo { width: 46px; height: auto; }
-
-.marcaNome {
-  display: flex;
-  flex-direction: column;
-  font-weight: 700;
-  font-stretch: 112%;
-  font-size: 1.05rem;
-  line-height: 1.05;
-  color: var(--tinta);
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
-}
-
-.marcaNome small {
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.3em;
-  color: var(--tinta-55);
-}
+.marcaLogo { width: auto; height: 84px; }
 
 .nav { display: flex; gap: var(--gap-4); font-weight: 500; }
 
@@ -52,7 +33,7 @@
   position: relative;
   max-width: var(--largura-max);
   margin: 0 auto;
-  padding: clamp(48px, 9vw, 120px) var(--margem) clamp(64px, 10vw, 140px);
+  padding: clamp(32px, 6vw, 80px) var(--margem) clamp(64px, 10vw, 140px);
   overflow: hidden;
 }
 
@@ -64,7 +45,7 @@
   height: auto;
   opacity: 0.09;
   mask-image: linear-gradient(to bottom, #000 55%, transparent 92%);
-  --simbolo-lavanda: var(--tinta);
+  color: var(--tinta);
   pointer-events: none;
 }
 
@@ -310,7 +291,7 @@
 
 .rodapeMarca { display: flex; align-items: center; gap: 12px; }
 
-.rodapeSimbolo { width: 28px; height: auto; }
+.rodapeLogo { width: auto; height: 52px; }
 
 .rodapeSites { display: flex; flex-wrap: wrap; gap: var(--gap-4); }
 
@@ -328,6 +309,5 @@
 
 @media (max-width: 480px) {
   .nav { gap: var(--gap-3); font-size: 0.95rem; }
-  .marcaSimbolo { width: 38px; }
-  .marcaNome { font-size: 0.9rem; }
+  .marcaLogo { height: 64px; }
 }

@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import logo from '@/public/logo-grupo.png'
 import { Simbolo } from '@/components/Simbolo'
 import { EMPRESAS, GRUPO, URL_SITE, dominio } from '@/lib/empresas'
 import estilos from './page.module.css'
@@ -9,7 +10,7 @@ const DADOS = {
   '@type': 'Organization',
   name: GRUPO.nome,
   url: URL_SITE,
-  logo: `${URL_SITE}/icon.svg`,
+  logo: `${URL_SITE}/logo-grupo.png`,
   address: {
     '@type': 'PostalAddress',
     streetAddress: GRUPO.endereco,
@@ -39,11 +40,7 @@ export default function Inicio() {
 
       <header className={estilos.cabecalho}>
         <a href="#inicio" className={estilos.marca} aria-label={GRUPO.nome}>
-          <Simbolo className={estilos.marcaSimbolo} />
-          <span className={estilos.marcaNome}>
-            <small>Grupo</small>
-            Almeida Andrade
-          </span>
+          <Image src={logo} alt="" className={estilos.marcaLogo} sizes="120px" priority />
         </a>
         <nav aria-label="Principal" className={estilos.nav}>
           <a href="#empresas">Empresas</a>
@@ -53,7 +50,7 @@ export default function Inicio() {
 
       <main id="inicio">
         <section className={estilos.abertura} aria-labelledby="titulo">
-          <Simbolo className={estilos.aberturaSimbolo} />
+          <Simbolo className={estilos.aberturaSimbolo} chapado />
           <div className={estilos.aberturaTexto}>
             <h1 id="titulo" className={estilos.titulo}>
               Imóveis, containers e engenharia para o Maranhão.
@@ -157,7 +154,7 @@ export default function Inicio() {
 
       <footer className={estilos.rodape}>
         <div className={estilos.rodapeMarca}>
-          <Simbolo className={estilos.rodapeSimbolo} />
+          <Image src={logo} alt={GRUPO.nome} className={estilos.rodapeLogo} sizes="64px" />
           <span>
             © {new Date().getFullYear()} {GRUPO.nome} · {GRUPO.cidade} — {GRUPO.uf}
           </span>
