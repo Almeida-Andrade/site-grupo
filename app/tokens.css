@@ -1,0 +1,27 @@
+:root {
+  /* Medidas do logo do grupo */
+  --tinta: #1B2470;
+  --lavanda: #9D9BD3;
+  --noite: #0D1240;
+  --off: #F6F6FA;
+  --branco: #FFFFFF;
+
+  --tinta-70: rgba(27, 36, 112, 0.7);
+  --tinta-55: rgba(27, 36, 112, 0.55);
+  --tinta-12: rgba(27, 36, 112, 0.12);
+  --tinta-06: rgba(27, 36, 112, 0.06);
+  --branco-70: rgba(255, 255, 255, 0.7);
+  --branco-16: rgba(255, 255, 255, 0.16);
+
+  --gap-2: 8px;
+  --gap-3: 16px;
+  --gap-4: 24px;
+  --gap-5: 40px;
+  --gap-6: 64px;
+  --gap-7: 112px;
+  --largura-max: 1200px;
+  --margem: clamp(16px, 5vw, 48px);
+
+  --escala-display: clamp(2.5rem, 6.2vw, 4.75rem);
+  --escala-titulo: clamp(1.75rem, 3.4vw, 2.5rem);
+}
