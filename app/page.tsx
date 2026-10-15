@@ -4,7 +4,7 @@ import { Simbolo } from '@/components/Simbolo'
 import { EMPRESAS, GRUPO, URL_SITE, dominio } from '@/lib/empresas'
 import estilos from './page.module.css'
 
-// O grupo e as três empresas ligadas por subOrganization: é o que diz ao Google que os subdomínios são da mesma casa.
+// O grupo e as empresas ligadas por subOrganization: é o que diz ao Google que os subdomínios são da mesma casa.
 const DADOS = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
@@ -56,9 +56,9 @@ export default function Inicio() {
               Imóveis, containers e engenharia para o Maranhão.
             </h1>
             <p className={estilos.lead}>
-              O Grupo Almeida Andrade reúne três empresas de São Luís: uma que aluga os próprios
-              imóveis, uma que leva containers prontos até a obra e uma que constrói no estado desde
-              1989.
+              O Grupo Almeida Andrade reúne quatro empresas de São Luís: uma que aluga os próprios
+              imóveis, uma que leva containers prontos até a obra, uma que constrói no estado desde
+              1989 e o estacionamento da Galeria A.
             </p>
             <ul className={estilos.atalhos}>
               {EMPRESAS.map((e) => (

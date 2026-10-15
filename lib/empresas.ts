@@ -84,6 +84,20 @@ export const EMPRESAS: Empresa[] = [
       },
     ],
   },
+  {
+    slug: 'iparking',
+    nome: 'iParking',
+    segmento: 'Estacionamento rotativo',
+    resumo:
+      'Estacionamento rotativo e mensal no pátio e no subsolo da Galeria A, no Calhau, com cancela que registra a placa e a hora de entrada.',
+    frentes: ['Avulso', 'Diária', 'Mensalista'],
+    url: 'https://iparking.grupoaandrade.com.br',
+    logo: { arquivo: '/marcas/iparking.png', largura: 900, altura: 318 },
+    cor: '#019A48',
+    contatos: [
+      { rotulo: 'WhatsApp (98) 98481-2793', href: 'https://wa.me/5598984812793' },
+    ],
+  },
 ]
 
 export function dominio(url: string) {

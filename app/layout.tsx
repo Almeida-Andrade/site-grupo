@@ -10,7 +10,7 @@ const fonte = Archivo({
 const TITULO = 'Grupo Almeida Andrade — Imóveis, containers e engenharia em São Luís'
 const DESCRICAO =
   'O Grupo Almeida Andrade reúne a E.G.I Empreendimentos (locação de imóveis próprios), ' +
-  'a EGI Rental (locação de containers) e a Exclusiva Engenharia (construção desde 1989), em São Luís — MA.'
+  'a EGI Rental (locação de containers), a Exclusiva Engenharia (construção desde 1989) e a iParking (estacionamento), em São Luís — MA.'
 
 export const metadata: Metadata = {
   metadataBase: new URL(URL_SITE),
