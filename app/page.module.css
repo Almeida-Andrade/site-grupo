@@ -24,19 +24,24 @@
   background: var(--noite-2);
 }
 
+/* Troca sem piscar: a foto nova entra por cima e só depois a antiga some.
+   Assim as duas nunca ficam meio transparentes ao mesmo tempo (o fundo escuro aparecia no meio). */
 .palcoFoto,
 .palcoMarca {
   position: absolute;
   inset: 0;
+  z-index: 0;
   opacity: 0;
-  transition: opacity 700ms var(--ease-out);
+  transition: opacity 0s linear 600ms;
 }
 .palcoFoto[data-ativa='sim'],
-.palcoMarca[data-ativa='sim'] { opacity: 1; }
+.palcoMarca[data-ativa='sim'] {
+  z-index: 1;
+  opacity: 1;
+  transition: opacity 600ms var(--ease-out);
+}
 
 .palcoFoto img { object-fit: cover; }
-.palcoFoto[data-ativa='sim'] img { animation: deriva 22s ease-in-out infinite alternate; }
-@keyframes deriva { from { transform: scale(1.01); } to { transform: scale(1.07); } }
 
 /* Empresa sem foto própria: a logo num campo branco, com a cor da marca na base */
 .palcoMarca { display: grid; place-items: center; background: var(--branco); }

@@ -30,7 +30,7 @@ export function Palco({ cenas, className, classes }: {
           if (e.isIntersecting) setAtiva((e.target as HTMLElement).dataset.cena)
         }
       },
-      { rootMargin: '-45% 0px -45% 0px' },
+      { rootMargin: '-50% 0px -50% 0px' },
     )
     alvos.forEach((a) => obs.observe(a))
     return () => obs.disconnect()
@@ -43,11 +43,11 @@ export function Palco({ cenas, className, classes }: {
           <div key={c.id} className={c.foto ? classes.foto : classes.marca} data-ativa={c.id === ativa ? 'sim' : 'nao'}
             style={c.cor ? ({ '--cor': c.cor } as React.CSSProperties) : undefined}>
             {c.foto ? (
-              <Image src={c.foto.arquivo} alt="" fill priority={i === 0} sizes="(max-width: 860px) 100vw, 47vw"
+              <Image src={c.foto.arquivo} alt="" fill priority={i === 0} loading={i === 0 ? undefined : 'eager'} sizes="(max-width: 860px) 100vw, 47vw"
                 style={{ objectPosition: c.foto.foco ?? '50% 50%' }} />
             ) : c.logo ? (
               <Image src={c.logo.arquivo} alt="" width={c.logo.largura} height={c.logo.altura}
-                sizes="30vw" className={classes.marcaLogo} />
+                sizes="30vw" loading="eager" className={classes.marcaLogo} />
             ) : null}
           </div>
         ))}
