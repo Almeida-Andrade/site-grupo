@@ -1,313 +1,396 @@
-/* Cabeçalho */
-.cabecalho {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--gap-4);
-  max-width: var(--largura-max);
-  margin: 0 auto;
-  padding: var(--gap-4) var(--margem);
+/* O palco: metade fixa com a foto; a coluna de leitura ao lado é o quadro de empresas do saguão. */
+
+.palcoGrade {
+  display: grid;
+  grid-template-columns: 47% 53%;
+  background: var(--noite);
+  color: var(--off);
 }
 
-.marca {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+/* ——— A metade fixa ——— */
+
+.palco {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  padding: 20px 0 20px 20px;
 }
 
-.marcaLogo { width: auto; height: 84px; }
-
-.nav { display: flex; gap: var(--gap-4); font-weight: 500; }
-
-.nav a {
-  color: var(--tinta-70);
-  padding: 6px 0;
-  border-bottom: 1px solid transparent;
-  transition: color 160ms, border-color 160ms;
-}
-
-.nav a:hover { color: var(--tinta); border-color: var(--tinta); }
-
-/* Abertura */
-.abertura {
+.palcoQuadro {
   position: relative;
-  max-width: var(--largura-max);
-  margin: 0 auto;
-  padding: clamp(32px, 6vw, 80px) var(--margem) clamp(64px, 10vw, 140px);
+  height: 100%;
+  border-radius: var(--raio);
   overflow: hidden;
+  background: var(--noite-2);
 }
 
-.aberturaSimbolo {
+.palcoFoto,
+.palcoMarca {
   position: absolute;
-  right: calc(var(--margem) * -1);
-  bottom: -6%;
-  width: min(58vw, 640px);
-  height: auto;
-  opacity: 0.09;
-  mask-image: linear-gradient(to bottom, #000 55%, transparent 92%);
-  color: var(--tinta);
-  pointer-events: none;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 700ms var(--ease-out);
 }
+.palcoFoto[data-ativa='sim'],
+.palcoMarca[data-ativa='sim'] { opacity: 1; }
 
-.aberturaTexto { position: relative; max-width: 780px; }
+.palcoFoto img { object-fit: cover; }
+.palcoFoto[data-ativa='sim'] img { animation: deriva 22s ease-in-out infinite alternate; }
+@keyframes deriva { from { transform: scale(1.01); } to { transform: scale(1.07); } }
 
-.titulo {
-  font-size: var(--escala-display);
-  font-weight: 800;
-  font-stretch: 118%;
-  line-height: 1.02;
-  letter-spacing: -0.02em;
-  color: var(--tinta);
-  text-wrap: balance;
-}
-
-.lead {
-  margin-top: var(--gap-4);
-  max-width: 600px;
-  font-size: clamp(1.05rem, 1.6vw, 1.2rem);
-  color: var(--tinta-70);
-  text-wrap: pretty;
-}
-
-.atalhos {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: var(--gap-5);
-}
-
-.atalhos a {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 18px;
-  border: 1px solid var(--tinta-12);
-  border-radius: 999px;
-  background: var(--branco);
-  font-weight: 600;
-  font-size: 0.95rem;
-  color: var(--tinta);
-  transition: border-color 160ms, transform 160ms;
-}
-
-.atalhos a::before {
+/* Empresa sem foto própria: a logo num campo branco, com a cor da marca na base */
+.palcoMarca { display: grid; place-items: center; background: var(--branco); }
+.palcoMarca::after {
   content: '';
-  width: 8px;
-  height: 8px;
-  border-radius: 2px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 22%;
   background: var(--cor);
 }
+.palcoMarcaLogo { width: 56%; height: auto; margin-bottom: 18%; }
 
-.atalhos a:hover { border-color: var(--cor); transform: translateY(-1px); }
-
-/* Empresas */
-.empresas {
-  max-width: var(--largura-max);
-  margin: 0 auto;
-  padding: 0 var(--margem) var(--gap-7);
+.palcoLegenda {
+  position: absolute;
+  left: 16px;
+  bottom: 16px;
+  max-width: calc(100% - 32px);
+  padding: 8px 12px;
+  border-radius: 4px;
+  background: var(--noite);
+  color: var(--off);
+  font-size: var(--passo-miudo);
 }
 
-.secaoTitulo {
-  font-size: var(--escala-titulo);
-  font-weight: 700;
-  font-stretch: 112%;
-  line-height: 1.1;
-  color: var(--tinta);
-}
+/* ——— A coluna de leitura ——— */
 
-.lista {
-  margin: var(--gap-5) 0 0;
-  padding: 0;
-  list-style: none;
-  border-top: 1px solid var(--tinta-12);
-}
+.coluna { padding: 0 clamp(32px, 5vw, 80px); min-width: 0; }
 
-.empresa {
+.abertura {
+  min-height: 100svh;
   display: grid;
-  grid-template-columns: minmax(220px, 340px) 1fr;
-  gap: clamp(24px, 5vw, 72px);
+  grid-template-rows: auto 1fr auto auto;
+  gap: var(--gap-5);
+  padding: 20px 0 56px;
+}
+
+.topo { display: flex; align-items: center; justify-content: space-between; gap: var(--gap-4); }
+
+/* O logo oficial é azul-marinho: vai numa placa branca para aparecer sobre a noite */
+.marca {
+  display: inline-flex;
+  padding: 8px 10px;
+  border-radius: var(--raio);
+  background: var(--branco);
+  transition: transform 200ms var(--ease-out);
+}
+.marca:hover { transform: translateY(-2px); }
+.marcaLogo { width: auto; height: 48px; }
+
+.nav { display: flex; align-items: center; gap: 4px; font-size: var(--passo-miudo); font-weight: 600; }
+.nav a {
+  display: inline-flex;
   align-items: center;
-  padding: clamp(32px, 5vw, 56px) 0;
-  border-bottom: 1px solid var(--tinta-12);
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: var(--raio);
+  transition: background-color 160ms, color 160ms;
+}
+.nav a:hover { background: var(--noite-2); }
+.nav .navAcao { background: var(--off); color: var(--noite); }
+.nav .navAcao:hover { background: var(--lavanda); }
+
+.aberturaFoto { display: none; }
+
+.aberturaFrase {
+  align-self: center;
+  max-width: 26ch;
+  font-size: var(--passo-lead);
+  line-height: 1.3;
+  color: var(--off);
+}
+
+.titulo {
+  font-size: var(--passo-display);
+  font-weight: 800;
+  line-height: 0.98;
+  letter-spacing: -0.025em;
+  color: var(--off);
+  text-wrap: balance;
+  transform-origin: left bottom;
+}
+
+/* O movimento da página: o título pesa e encolhe um pouco quando a primeira tela sai */
+@supports (animation-timeline: view()) {
+  .titulo {
+    animation: assenta linear both;
+    animation-timeline: view();
+    animation-range: exit 0% exit 100%;
+  }
+  @keyframes assenta { to { scale: 0.94; } }
+}
+
+/* Coluna estreita, sem título nem imagem */
+.intro {
+  max-width: 44ch;
+  display: grid;
+  gap: 1.2em;
+  padding: 40px 0 160px;
+  font-size: var(--passo-texto);
+  line-height: 1.55;
+  color: var(--branco-70);
+}
+.intro p:first-child { font-weight: 500; color: var(--off); }
+
+/* O quadro de empresas, como a placa do saguão */
+.quadroEmpresas {
+  padding: 32px 32px 24px;
+  border-radius: var(--raio);
+  background: var(--noite-2);
   scroll-margin-top: 24px;
 }
+.quadroTitulo { font-size: var(--passo-lead); font-weight: 600; line-height: 1.2; margin-bottom: 16px; }
+.quadroLista { display: grid; }
 
-.logo {
-  display: grid;
-  place-items: center;
-  aspect-ratio: 4 / 3;
-  padding: 14%;
-  background: var(--branco);
-  border-radius: 6px;
-  border-top: 4px solid var(--cor);
-  box-shadow: 0 1px 2px var(--tinta-06), 0 12px 32px -18px var(--tinta-12);
-}
-
-.logo img { width: 100%; height: 100%; object-fit: contain; }
-
-.ordem {
+.linha {
   display: flex;
-  align-items: baseline;
-  gap: 12px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--tinta-55);
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 52px;
+  border-radius: 4px;
+  transition: padding 200ms var(--ease-out), background-color 200ms;
+}
+.linha:hover { background: var(--noite-3); padding: 0 12px; }
+.linhaNome { display: inline-flex; align-items: center; gap: 12px; font-weight: 600; font-size: var(--passo-texto); }
+.linhaNome::before {
+  content: '';
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  background: var(--cor);
+  flex: none;
+}
+.linhaSegmento { font-size: var(--passo-miudo); color: var(--branco-70); text-align: right; }
+
+/* ——— Uma empresa por vez ——— */
+
+.empresa {
+  min-height: 92svh;
+  padding: 120px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
 }
 
-.ordem span {
-  font-variant-numeric: tabular-nums;
-  font-stretch: 125%;
-  font-weight: 700;
-  color: var(--cor);
+.empresaMidia { display: none; }
+
+.empresaLogo {
+  display: inline-flex;
+  padding: 14px 18px;
+  border-radius: var(--raio);
+  background: var(--branco);
 }
+.empresaLogo img { width: auto; height: 52px; }
 
 .empresaNome {
-  margin-top: 6px;
-  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-size: var(--passo-titulo);
   font-weight: 700;
   font-stretch: 112%;
-  line-height: 1.1;
+  line-height: 1.05;
+  color: var(--off);
+}
+
+.empresaResumo { max-width: 46ch; font-size: var(--passo-texto); line-height: 1.55; color: var(--branco-70); }
+.empresaResumo strong { font-weight: 600; color: var(--off); }
+
+.frentes { display: flex; flex-wrap: wrap; gap: 8px; }
+.frentes li {
+  padding: 6px 12px;
+  border-radius: 4px;
+  background: var(--noite-2);
+  font-size: var(--passo-miudo);
+  color: var(--off);
+}
+
+/* As duas ações em células cheias, lado a lado */
+.acoes {
+  width: 100%;
+  max-width: 640px;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 8px;
+  margin-top: 12px;
+}
+.acaoSite,
+.acaoWhats {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 72px;
+  padding: 0 18px 0 20px;
+  border-radius: var(--raio);
+  font-weight: 600;
+  transition: background-color 180ms, transform 160ms var(--ease-out);
+}
+.acaoSite span,
+.acaoWhats span { display: grid; gap: 2px; line-height: 1.2; min-width: 0; }
+.acaoSite small,
+.acaoWhats small { font-size: 0.875rem; font-weight: 400; overflow-wrap: anywhere; }
+.acaoSite { background: var(--off); color: var(--noite); }
+.acaoSite small { color: var(--tinta-70); }
+.acaoSite:hover { background: var(--lavanda); }
+.acaoWhats { background: var(--noite-2); color: var(--off); }
+.acaoWhats small { color: var(--branco-70); }
+.acaoWhats:hover { background: var(--noite-3); }
+.acaoSite:active,
+.acaoWhats:active { transform: scale(0.98); }
+.acaoSeta { width: 22px; height: 22px; flex: none; transition: transform 200ms var(--ease-out); }
+.acaoSite:hover .acaoSeta,
+.acaoWhats:hover .acaoSeta { transform: translate(2px, -2px); }
+
+.outros { font-size: var(--passo-miudo); color: var(--branco-70); }
+.outros a { text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--branco-30); }
+.outros a:hover { color: var(--off); text-decoration-color: var(--off); }
+
+/* ——— Contato: o cartão sobre a fachada ——— */
+
+.contato { position: relative; min-height: 100svh; background: var(--noite); }
+.contatoFoto { position: absolute; inset: 0; }
+.contatoFoto img { object-fit: cover; object-position: 70% 50%; }
+
+.cartao {
+  position: absolute;
+  top: 60px;
+  left: 60px;
+  width: 380px;
+  padding: 32px 32px 0;
+  border-radius: var(--raio);
+  background: var(--off);
+  color: var(--noite);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  overflow: hidden;
+}
+.cartaoTitulo { font-size: var(--passo-lead); font-weight: 600; line-height: 1.15; color: var(--tinta); }
+.cartaoEndereco { font-size: var(--passo-texto); line-height: 1.5; }
+.cartaoLista { display: grid; gap: 2px; font-size: var(--passo-miudo); }
+.cartaoLista li { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 36px; }
+.cartaoLista span { display: inline-flex; align-items: center; gap: 10px; }
+.cartaoLista span::before { content: ''; width: 10px; height: 10px; border-radius: 2px; background: var(--cor); flex: none; }
+.cartaoLista a {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: var(--lavanda);
+}
+.cartaoLista a:hover { text-decoration-color: var(--tinta); }
+.cartaoBotao {
+  margin: 6px -32px 0;
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--tinta);
+  color: var(--off);
+  font-weight: 600;
+  transition: background-color 180ms;
+}
+.cartaoBotao:hover { background: var(--noite); }
+.cartaoBotao:focus-visible { outline-offset: -6px; outline-color: var(--off); }
+
+/* ——— Rodapé: foto de um lado, os sites do outro ——— */
+
+.rodape { display: grid; grid-template-columns: 1fr 1fr; min-height: 88svh; background: var(--off); }
+.rodapeFoto { position: relative; overflow: hidden; }
+/* Bem perto do letreiro da Galeria, maior do que em qualquer outro lugar da página */
+.rodapeFoto img { object-fit: cover; object-position: 76% 40%; transform: scale(1.7); transform-origin: 76% 40%; }
+
+.rodapeConteudo {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  padding: 72px clamp(32px, 6vw, 96px) 32px;
   color: var(--noite);
 }
+.rodapeLogo { align-self: flex-start; width: auto; height: 72px; }
 
-.resumo {
-  margin-top: var(--gap-3);
-  max-width: 620px;
-  color: var(--tinta-70);
-  text-wrap: pretty;
-}
-
-.frentes {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: var(--gap-4);
-}
-
-.frentes li {
-  padding: 4px 12px;
-  border-radius: 4px;
-  background: var(--tinta-06);
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--tinta);
-}
-
-.visitar {
+.rodapeSites { display: grid; gap: 4px; justify-items: start; }
+.rodapeSites a {
   display: inline-flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  column-gap: 14px;
-  row-gap: 2px;
-  margin-top: var(--gap-4);
-  padding: 14px 22px;
-  border-radius: 6px;
-  background: var(--tinta);
-  color: var(--branco);
-  font-weight: 600;
-  transition: background 160ms;
-}
-
-.visitar:hover { background: var(--noite); }
-
-.dominio {
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--branco-70);
-}
-
-/* Contato */
-.contato {
-  background: var(--noite);
-  color: var(--branco);
-  padding: var(--gap-7) var(--margem);
-}
-
-.contatoTopo,
-.contatos {
-  max-width: calc(var(--largura-max) - var(--margem) * 2);
-  margin: 0 auto;
-}
-
-.contatoTopo {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: var(--gap-4);
-}
-
-.contato .secaoTitulo { color: var(--branco); }
-
-.sede {
-  color: var(--branco-70);
-  line-height: 1.7;
-}
-
-.sede a { color: var(--lavanda); font-weight: 600; }
-
-.sede a:hover { color: var(--branco); }
-
-.contatos {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--gap-5);
-  margin-top: var(--gap-6);
-}
-
-.contatos > li {
-  padding-top: var(--gap-4);
-  border-top: 3px solid var(--cor);
-}
-
-.contatos h3 { font-size: 1.15rem; font-weight: 700; font-stretch: 112%; }
-
-.contatos p { margin-top: 2px; font-size: 0.9rem; color: var(--branco-70); }
-
-.contatos ul { display: grid; gap: 8px; margin-top: var(--gap-3); }
-
-.contatos ul a {
-  font-size: 0.95rem;
-  overflow-wrap: anywhere;
-  border-bottom: 1px solid var(--branco-16);
-  transition: border-color 160ms;
-}
-
-.contatos ul a:hover { border-color: var(--branco); }
-
-/* Rodapé */
-.rodape {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
   align-items: center;
-  gap: var(--gap-4);
-  max-width: var(--largura-max);
-  margin: 0 auto;
-  padding: var(--gap-5) var(--margem);
-  font-size: 0.875rem;
-  color: var(--tinta-70);
+  gap: 14px;
+  min-height: 52px;
+  font-size: clamp(1.5rem, 2.4vw, 2.25rem);
+  font-weight: 700;
+  font-stretch: 112%;
+  line-height: 1.05;
+  color: var(--tinta);
+  transition: transform 220ms var(--ease-out), color 200ms;
 }
+.rodapeSites a::before { content: ''; width: 0.32em; height: 0.32em; border-radius: 3px; background: var(--cor); flex: none; }
+.rodapeSites:hover a { color: var(--tinta-70); }
+.rodapeSites a:hover { color: var(--tinta); transform: translateX(12px); }
 
-.rodapeMarca { display: flex; align-items: center; gap: 12px; }
+.rodapeBlocos { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; font-size: var(--passo-miudo); line-height: 1.6; }
+.rodapeBlocos a { text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--lavanda); }
+.rodapeBlocos a:hover { text-decoration-color: var(--tinta); }
 
-.rodapeLogo { width: auto; height: 52px; }
+.legal { margin-top: auto; font-size: var(--passo-miudo); color: var(--tinta-70); }
 
-.rodapeSites { display: flex; flex-wrap: wrap; gap: var(--gap-4); }
-
-.rodapeSites a:hover { color: var(--tinta); }
+/* ——— Tablet e celular: o palco vira foto no topo e cada empresa traz a sua ——— */
 
 @media (max-width: 860px) {
-  .contatos { grid-template-columns: 1fr; gap: var(--gap-5); }
-}
+  .palcoGrade { display: block; }
+  .palco { display: none; }
+  .coluna { padding: 0 20px; }
 
-@media (max-width: 760px) {
-  .empresa { grid-template-columns: 1fr; }
-  .logo { max-width: 300px; aspect-ratio: 16 / 9; padding: 8% 14%; }
-  .aberturaSimbolo { width: 90vw; bottom: -2%; }
-}
+  .abertura { min-height: 0; grid-template-rows: auto; gap: 24px; padding: 12px 0 72px; }
+  .marcaLogo { height: 40px; }
+  .nav a { padding: 0 12px; }
+  .aberturaFoto {
+    display: block;
+    position: relative;
+    height: 58svh;
+    margin: 0 -8px;
+    border-radius: var(--raio);
+    overflow: hidden;
+  }
+  .aberturaFoto img { object-fit: cover; object-position: 50% 40%; }
+  .aberturaFrase { max-width: none; font-size: var(--passo-texto); }
 
-@media (max-width: 480px) {
-  .nav { gap: var(--gap-3); font-size: 0.95rem; }
-  .marcaLogo { height: 64px; }
+  .intro { padding: 8px 0 96px; max-width: 90%; }
+  .quadroEmpresas { padding: 24px 20px 16px; margin: 0 -8px; }
+  .linha { min-height: 56px; }
+
+  .empresa { min-height: 0; padding: 96px 0 0; }
+  .empresaMidia {
+    display: block;
+    position: relative;
+    width: calc(100% + 16px);
+    margin: 0 -8px 12px;
+    aspect-ratio: 4 / 3;
+    border-radius: var(--raio);
+    overflow: hidden;
+    background: var(--branco);
+  }
+  .empresaMidia img { object-fit: cover; }
+  .acoes { grid-template-columns: 1fr; max-width: none; }
+
+  .contato { min-height: 0; padding-bottom: 72px; padding-top: 96px; }
+  .contatoFoto { position: relative; height: 70svh; }
+  .cartao { position: relative; top: auto; left: auto; width: auto; margin: -80px 16px 0; padding: 24px 24px 0; }
+  .cartaoBotao { margin: 6px -24px 0; min-height: 56px; }
+
+  .rodape { grid-template-columns: 1fr; min-height: 0; }
+  .rodapeFoto { height: 50svh; }
+  .rodapeConteudo { padding: 48px 20px 28px; gap: 36px; }
+  .rodapeSites a { font-size: clamp(1.5rem, 7vw, 2rem); }
 }

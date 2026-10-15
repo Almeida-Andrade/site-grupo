@@ -20,7 +20,7 @@ export default async function Imagem() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={src} width={1411 * 0.33} height={1059 * 0.33} alt="" />
         <div style={{ marginTop: 40, fontSize: 34, color: '#33365C' }}>
-          Imóveis, containers e engenharia em São Luís
+          Imóveis, containers, engenharia, energia solar e estacionamento
         </div>
       </div>
     ),

@@ -7,10 +7,11 @@ const fonte = Archivo({
   subsets: ['latin'], variable: '--fonte', display: 'swap', axes: ['wdth'],
 })
 
-const TITULO = 'Grupo Almeida Andrade — Imóveis, containers e engenharia em São Luís'
+const TITULO = 'Grupo Almeida Andrade — cinco empresas de São Luís'
 const DESCRICAO =
   'O Grupo Almeida Andrade reúne a E.G.I Empreendimentos (locação de imóveis próprios), ' +
-  'a EGI Rental (locação de containers), a Exclusiva Engenharia (construção desde 1989) e a iParking (estacionamento), em São Luís — MA.'
+  'a EGI Rental (locação de containers), a Exclusiva Engenharia (construção desde 1989), a Energy-E (energia solar) ' +
+  'e a iParking (estacionamento), em São Luís — MA.'
 
 export const metadata: Metadata = {
   metadataBase: new URL(URL_SITE),
@@ -33,9 +34,15 @@ export const metadata: Metadata = {
   },
 }
 
+// Liga as entradas animadas só quando há script; sem ele, tudo aparece de uma vez.
+const LIGA_JS = "document.documentElement.classList.add('js')"
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR" className={fonte.variable}>
+    <html lang="pt-BR" className={fonte.variable} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: LIGA_JS }} />
+      </head>
       <body>{children}</body>
     </html>
   )

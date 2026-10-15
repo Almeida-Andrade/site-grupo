@@ -18,6 +18,16 @@ export interface Contato {
   href: string
 }
 
+// Foto do trabalho da própria empresa (nada de banco de imagens). Sem foto, o palco mostra a logo na cor da marca.
+export interface Foto {
+  arquivo: string
+  largura: number
+  altura: number
+  alt: string
+  legenda: string
+  foco?: string
+}
+
 export interface Empresa {
   slug: string
   nome: string
@@ -27,6 +37,7 @@ export interface Empresa {
   url: string
   logo: { arquivo: string; largura: number; altura: number }
   cor: string
+  foto?: Foto
   contatos: Contato[]
 }
 
@@ -42,6 +53,7 @@ export const EMPRESAS: Empresa[] = [
     url: 'https://egi.grupoaandrade.com.br',
     logo: { arquivo: '/marcas/egi.png', largura: 1608, altura: 549 },
     cor: '#0A2BE0',
+    foto: { arquivo: '/fotos/egi-center-valley.jpg', largura: 2000, altura: 1199, alt: 'Entrada do Center Valley, centro comercial da E.G.I, com a fachada vermelha e a caixa-d’água com o logo', legenda: 'Center Valley, centro comercial da E.G.I', foco: '30% 50%' },
     contatos: [
       { rotulo: 'WhatsApp (98) 98481-2793', href: 'https://wa.me/5598984812793' },
       {
@@ -76,6 +88,7 @@ export const EMPRESAS: Empresa[] = [
     url: 'https://exclusiva.grupoaandrade.com.br',
     logo: { arquivo: '/marcas/exclusiva.png', largura: 274, altura: 292 },
     cor: '#C11F22',
+    foto: { arquivo: '/fotos/exclusiva-mateus-maiobao.jpg', largura: 1385, altura: 792, alt: 'O Supermercado Mateus Maiobão, obra da Exclusiva entregue em 2010, com o estacionamento cheio', legenda: 'Mateus Maiobão, obra da Exclusiva entregue em 2010', foco: '40% 50%' },
     contatos: [
       { rotulo: 'WhatsApp (98) 98481-2793', href: 'https://wa.me/5598984812793' },
       {
@@ -85,11 +98,32 @@ export const EMPRESAS: Empresa[] = [
     ],
   },
   {
+    slug: 'energy-e',
+    nome: 'Energy-E',
+    segmento: 'Energia solar',
+    resumo:
+      'Quatro usinas solares, as Canis, às margens da BR-222, entre Pindaré-Mirim e Santa Inês, no interior do Maranhão. Entraram em operação em 2025 e foram construídas pela Exclusiva Engenharia.',
+    frentes: ['Usinas solares', 'Canis 1, 2, 3 e 5', 'Vale do Pindaré'],
+    url: 'https://energy-e.grupoaandrade.com.br',
+    logo: { arquivo: '/marcas/energy-e.png', largura: 1420, altura: 505 },
+    // Ciano do globo do logo: o verde da Energy-E é quase o mesmo da iParking
+    cor: '#00AEEF',
+    foto: { arquivo: '/fotos/energy-e-canis.jpg', largura: 1800, altura: 1012, alt: 'As usinas Canis 1, 2 e 3 vistas do alto, com a mata em volta', legenda: 'Usinas Canis 1, 2 e 3, à beira da BR-222', foco: '35% 50%' },
+    // Mesmo contato da EGI (decisão de 15/10/2026)
+    contatos: [
+      { rotulo: 'WhatsApp (98) 98481-2793', href: 'https://wa.me/5598984812793' },
+      {
+        rotulo: 'egiempreendimentos@grupoaandrade.com.br',
+        href: 'mailto:egiempreendimentos@grupoaandrade.com.br',
+      },
+    ],
+  },
+  {
     slug: 'iparking',
     nome: 'iParking',
     segmento: 'Estacionamento rotativo',
     resumo:
-      'Estacionamento rotativo e mensal no pátio e no subsolo da Galeria A, no Calhau, com cancela que registra a placa e a hora de entrada.',
+      'Estacionamento rotativo e mensal no subsolo da Galeria A, no Calhau, com cancela que lê a placa e registra a hora de entrada.',
     frentes: ['Avulso', 'Diária', 'Mensalista'],
     url: 'https://iparking.grupoaandrade.com.br',
     logo: { arquivo: '/marcas/iparking.png', largura: 900, altura: 318 },

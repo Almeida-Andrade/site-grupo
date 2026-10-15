@@ -36,3 +36,6 @@ next-env.d.ts
 # contexto interno — fica local
 CLAUDE.md
 AGENTS.md
+
+# prints do inspetor de design
+.taste-skill/
