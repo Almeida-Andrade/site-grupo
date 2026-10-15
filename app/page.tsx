@@ -4,6 +4,7 @@ import saguao from '@/public/fotos/galeria-a-saguao.jpg'
 import fachada from '@/public/fotos/galeria-a-fachada.jpg'
 import { Entradas } from '@/components/Entradas'
 import { Palco, type Cena } from '@/components/Palco'
+import { FundoA } from '@/components/FundoA'
 import { EMPRESAS, GRUPO, URL_SITE, dominio } from '@/lib/empresas'
 import s from './page.module.css'
 
@@ -65,6 +66,7 @@ export default function Inicio() {
       <Entradas />
 
       <div className={s.palcoGrade} id="inicio">
+        <FundoA classes={{ camada: s.fundoA, palco: s.fundoAPalco, letra: s.fundoALetra }} />
         <Palco cenas={CENAS} className={s.palco}
           classes={{ quadro: s.palcoQuadro, foto: s.palcoFoto, marca: s.palcoMarca, marcaLogo: s.palcoMarcaLogo, legenda: s.palcoLegenda }} />
 
