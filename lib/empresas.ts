@@ -67,7 +67,7 @@ export const EMPRESAS: Empresa[] = [
     nome: 'EGI Rental',
     segmento: 'Locação de containers',
     resumo:
-      'Containers para escritório, almoxarifado, sanitário e cozinha em locação de curto, médio e longo prazo, com entrega e retirada no local e projetos sob medida para obras e indústrias.',
+      'Containers para escritório, almoxarifado, sanitário e cozinha em locação de médio e longo prazo, com entrega e retirada no local e projetos sob medida para obras e indústrias.',
     frentes: ['Escritório', 'Almoxarifado', 'Sanitário', 'Sob medida'],
     url: 'https://egi.rental.grupoaandrade.com.br',
     logo: { arquivo: '/marcas/egi-rental.png', largura: 470, altura: 214 },
