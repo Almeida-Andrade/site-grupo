@@ -85,7 +85,6 @@
   width: min(78svh, 720px);
   color: #1A2160; /* um passo acima da noite: aparece sem disputar com o texto */
   transform: translate3d(74vw, 58svh, 0) translate(-50%, -50%);
-  will-change: transform;
 }
 .fundoALetra svg { width: 100%; height: auto; }
 
