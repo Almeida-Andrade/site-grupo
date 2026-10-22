@@ -74,7 +74,7 @@ export const EMPRESAS: Empresa[] = [
     cor: '#597B97',
     contatos: [
       { rotulo: 'WhatsApp (98) 99102-2068', href: 'https://wa.me/5598991022068' },
-      { rotulo: 'contato@egirental.com.br', href: 'mailto:contato@egirental.com.br' },
+      { rotulo: 'contato@grupoaandrade.com.br', href: 'mailto:contato@grupoaandrade.com.br' },
       { rotulo: '@egi.rental', href: 'https://www.instagram.com/egi.rental' },
     ],
   },
